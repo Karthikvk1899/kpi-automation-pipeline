@@ -21,3 +21,9 @@ Automates KPI computation from raw CSV input with validation, unit tests, and sc
 pip install -e ".[dev]"
 python -m kpi_automation.cli
 pytest -q
+
+## Run the Pipeline
+
+### CSV Mode
+```bash
+python run.py --source csv

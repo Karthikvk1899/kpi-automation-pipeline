@@ -25,14 +25,14 @@ def load_sales_data() -> pd.DataFrame:
         FROM KPI_DB.KPI_SCHEMA.SALES_DAILY
         ORDER BY date
         """
+        cur = conn.cursor()
+        try:
+            cur.execute(query)
+            df = cur.fetch_pandas_all()
+        finally:
+            cur.close()
 
-        df = pd.read_sql(query, conn)
-
-        # Normalize Snowflake uppercase column names
         df.columns = [c.lower() for c in df.columns]
-
         return df
-
     finally:
         conn.close()
-
