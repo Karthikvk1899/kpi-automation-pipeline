@@ -17,4 +17,3 @@ Thumbs.db
 # Outputs (generated)
 data/processed/*.csv
 reports/*.html
-
