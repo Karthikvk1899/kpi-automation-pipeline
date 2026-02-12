@@ -1,0 +1,22 @@
+name: Scheduled KPI Run
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * *"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[dev]"
+      - run: python -m kpi_automation.cli
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kpi-outputs
+          path: |
+            data/processed/kpis_daily.csv
+            reports/kpi_report.html
